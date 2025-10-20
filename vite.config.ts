@@ -30,7 +30,9 @@
         'lucide-react@0.487.0': 'lucide-react',
         'input-otp@1.4.2': 'input-otp',
         'figma:asset/a9d84a057545f546a531f3531eefb82e0de45883.png': path.resolve(__dirname, './src/assets/a9d84a057545f546a531f3531eefb82e0de45883.png'),
-        'figma:asset/4adcf52d9f1a5f5ad10558148b7235a9068c3781.png': path.resolve(__dirname, './src/assets/4adcf52d9f1a5f5ad10558148b7235a9068c3781.png'),
+  // The large hero asset was moved to `public/assets` so it is not bundled
+  // into the initial application JS. Use the public path when referenced.
+  'figma:asset/4adcf52d9f1a5f5ad10558148b7235a9068c3781.png': path.resolve(__dirname, './public/assets/hero-large.svg'),
         'embla-carousel-react@8.6.0': 'embla-carousel-react',
         'cmdk@1.1.1': 'cmdk',
         'class-variance-authority@0.7.1': 'class-variance-authority',

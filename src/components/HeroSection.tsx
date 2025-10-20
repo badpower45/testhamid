@@ -1,5 +1,5 @@
 import { Button } from "./ui/button";
-import heroImage from "figma:asset/4adcf52d9f1a5f5ad10558148b7235a9068c3781.png";
+import { LazyImage } from "./LazyImage";
 
 export function HeroSection() {
   const scrollToSection = (id: string) => {
@@ -102,14 +102,23 @@ export function HeroSection() {
               {/* Image Container */}
               <div className="relative" style={{ zIndex: 1 }}>
                 <div className="absolute inset-0 bg-gradient-to-tr from-[#CE1126]/20 to-transparent rounded-3xl" />
-                <img
-                  src={heroImage}
+                {/*
+                  Use the LazyImage component with a tiny SVG placeholder so the
+                  first paint is fast. The full-resolution photo is served from
+                  the `public/assets` directory and will be loaded after initial
+                  critical rendering (unless user has Save-Data or a very slow
+                  connection), which avoids blocking the initial load.
+                */}
+                <LazyImage
+                  src={`${import.meta.env.BASE_URL}assets/hero-large.png`}
+                  placeholder={`${import.meta.env.BASE_URL}assets/hero-placeholder.svg`}
                   alt="حامد بندق"
                   className="relative rounded-3xl shadow-2xl w-full max-w-lg mx-auto object-cover"
-                  style={{ 
+                  style={{
                     border: '8px solid rgba(192, 159, 95, 0.4)',
-                    aspectRatio: '3/4'
+                    aspectRatio: '3/4',
                   }}
+                  eager={false}
                 />
               </div>
             </div>
