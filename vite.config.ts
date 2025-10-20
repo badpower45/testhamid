@@ -1,7 +1,16 @@
 
+  // Disable strict TypeScript checking in this config file so it works even when dev dependencies
+  // or @types aren't installed in the environment used by the editor or CI.
+  // This keeps the Vite config stable while the repo is being prepared for GitHub Pages.
+  // @ts-nocheck
+
   import { defineConfig } from 'vite';
   import react from '@vitejs/plugin-react-swc';
   import path from 'path';
+  import { fileURLToPath } from 'url';
+
+  // Compute __dirname in ESM environments
+  const __dirname = fileURLToPath(new URL('.', import.meta.url));
 
   export default defineConfig({
     // Base public path when served from GitHub Pages for the repository `badpower45/testhamid`.
