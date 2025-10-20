@@ -4,6 +4,9 @@
   import path from 'path';
 
   export default defineConfig({
+    // Base public path when served from GitHub Pages for the repository `badpower45/testhamid`.
+    // This ensures built asset URLs resolve correctly at https://badpower45.github.io/testhamid/
+    base: '/testhamid/',
     plugins: [react()],
     resolve: {
       extensions: ['.js', '.jsx', '.ts', '.tsx', '.json'],
@@ -53,7 +56,8 @@
     },
     build: {
       target: 'esnext',
-      outDir: 'build',
+      // Use the standard `dist` output directory so deployment tooling and examples work out of the box.
+      outDir: 'dist',
     },
     server: {
       port: 3000,
