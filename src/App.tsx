@@ -1,3 +1,4 @@
+import React, { useEffect } from "react";
 import { Navbar } from "./components/Navbar";
 import { HeroSection } from "./components/HeroSection";
 import { AboutSection } from "./components/AboutSection";
@@ -8,6 +9,22 @@ import { ContactSection } from "./components/ContactSection";
 import { Footer } from "./components/Footer";
 
 export default function App() {
+  useEffect(() => {
+    try {
+      document.body.setAttribute("data-app-ready", "true");
+    } catch (e) {
+      // ignore
+    }
+
+    return () => {
+      try {
+        document.body.removeAttribute("data-app-ready");
+      } catch (e) {
+        // ignore
+      }
+    };
+  }, []);
+
   return (
     <div className="min-h-screen">
       <Navbar />
