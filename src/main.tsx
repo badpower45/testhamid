@@ -1,4 +1,34 @@
 
+  // Prevent third-party scripts from throwing when attempting to define a custom
+  // element more than once (e.g. webcomponent polyfills or editor plugins).
+  // This monkey-patches the browser API early so any later attempts to re-define
+  // an element simply get ignored instead of throwing and breaking the entire app.
+  if (typeof window !== "undefined" && typeof (window as any).customElements !== "undefined") {
+    try {
+      const nativeDefine = (window as any).customElements.define.bind(
+        (window as any).customElements,
+      );
+      (window as any).customElements.define = (
+        name: string,
+        constructor: CustomElementConstructor,
+        options?: ElementDefinitionOptions,
+      ) => {
+        if ((window as any).customElements.get(name)) {
+          // element already defined — ignore duplicate registration
+          // eslint-disable-next-line no-console
+          console.warn(`Custom element '${name}' already defined — skipping re-definition.`);
+          return;
+        }
+        return nativeDefine(name, constructor, options as any);
+      };
+    } catch (e) {
+      // If monkey-patching fails for any reason, continue — the error overlay will
+      // still capture runtime exceptions but we prefer not to crash here.
+      // eslint-disable-next-line no-console
+      console.warn("Failed to patch customElements.define:", e);
+    }
+  }
+
   import { createRoot } from "react-dom/client";
   import App from "./App.tsx";
   import "./index.css";

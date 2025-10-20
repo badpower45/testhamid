@@ -5,19 +5,20 @@
       <meta charset="UTF-8" />
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <title>Landing Page Design for Hamed Bondok</title>
-      <!-- Ensure relative URLs resolve correctly when served from GitHub Pages under /testhamid/ -->
-      <base href="/testhamid/" />
+   <!-- Note: the build step will inject the correct base path for production.
+     Keep the source index.html free of an explicit base so the dev server
+     can resolve module imports correctly. -->
     </head>
 
     <body>
-      <div id="root">جاري تحميل التطبيق...</div>
+  <div id="root">جاري تحميل التطبيق...</div>
       <noscript>
         <div style="padding:24px;background:#fff;color:#000;min-height:100vh;">
           <h1>الرجاء تفعيل JavaScript</h1>
           <p>هذا الموقع يتطلب تشغيل JavaScript لعرض محتوياته.</p>
         </div>
       </noscript>
-      <script type="module" src="/src/main.tsx"></script>
+      <script type="module" src="./src/main.tsx"></script>
     </body>
   </html>
   
